@@ -1114,24 +1114,16 @@ spreadCompositeRequestWithoutBody(name: string, testHeader: string)
 Expected path parameter: name="foo"
 Expected header parameter: testHeader="bar"
 
-### Payload_BodyRoot_InputOnly
+### Payload_BodyRoot_inputAndOutput
 
-- Endpoints: `post /input-only/alice`
+- Endpoint: `post /body-root/input-and-output`
 
-Expected input body:
+Test case for using @bodyRoot with a header and a path parameter for input and output request.
 
-```json
-{
-  "age": 30,
-  "gender": "female"
-}
-```
+Expected request path:
+/input-and-output/alice
 
-### Payload_BodyRoot_InputAndOutput
-
-- Endpoints: `post /input-and-output/alice`
-
-Expected input body:
+Expected request body:
 
 ```json
 {
@@ -1139,6 +1131,9 @@ Expected input body:
   "gender": "female"
 }
 ```
+
+Expected request header:
+`x-client-id: 123`
 
 Expected response body:
 
@@ -1150,29 +1145,72 @@ Expected response body:
 }
 ```
 
-### Payload_BodyRoot_OutputOnly
+Expected response header:
+`x-client-id: 123`
 
-- Endpoints: `get /output-only/alice`
+### Payload_BodyRoot_inputOnly
 
-Expected response body:
+- Endpoint: `post /body-root/input-only`
+
+Test case for using @bodyRoot with a header and a path parameter for input only request.
+
+Expected request path:
+/input-only/alice
+
+Expected request body:
 
 ```json
 {
-  "name": "alice",
   "age": 30,
   "gender": "female"
 }
 ```
 
-### Payload_BodyRoot_OptionalParam
+Expected request header:
+`x-client-id: 123`
 
-- Endpoints: `get /optional-param`
+### Payload_BodyRoot_optionalQuery
+
+- Endpoint: `get /body-root/optional-param`
+
+Test case for using @bodyRoot with optional parameters.
+
+Expected request path:
+/optional-query/alice
+
+Expected request query:
+`orderby=asc`
+
+Expected request header:
+`x-client-id: 123`
 
 Expected response body:
 
 ```json
 ["cat", "dog"]
 ```
+
+### Payload_BodyRoot_outputOnly
+
+- Endpoint: `get /body-root/output-only`
+
+Test case for using @bodyRoot with a header and a path parameter for output only response.
+
+Expected request path:
+/output-only/alice
+
+Expected response body:
+
+```json
+{
+  "name": "alice",
+  "age": 30,
+  "gender": "female"
+}
+```
+
+Expected response header:
+`x-client-id: 123`
 
 ### Payload_ContentNegotiation_DifferentBody
 
